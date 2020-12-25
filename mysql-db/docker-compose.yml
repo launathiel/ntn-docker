@@ -1,0 +1,31 @@
+version: "3.7"
+services:
+  mysql-server:
+    image: mysql:8.0.19
+    restart: always
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: secret
+    volumes:
+      - volntn:/var/lib/mysql
+    ports:
+      - "3308:3306"
+    networks:
+      - database
+   
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.0.1
+    restart: always
+    environment:
+      PMA_HOST: mysql-server
+      PMA_USER: root
+      PMA_PASSWORD: secret
+    ports:
+      - "8000:80"
+    networks:
+      - database
+volumes:
+  volntn:
+
+networks:
+  database:
