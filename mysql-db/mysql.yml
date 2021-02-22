@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  mysql-server:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: nathan123 #you can change the password
+    volumes:
+      - mysqlvol:/var/lib/mysql #mysqlvol must be created first!
+    ports:
+      - "3308:3306" #we use host's port number 3308
+
+volumes:
+  mysqlvol:
