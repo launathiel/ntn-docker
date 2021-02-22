@@ -1,0 +1,12 @@
+version: "3.7"
+services:
+  postgres-server:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: nathan123
+    volumes:
+      - mariadb-vol:/var/lib/mysql
+    ports:
+      - "3310:3306" #we use host's port number 3310
+volumes:
+  mariadb-vol:
