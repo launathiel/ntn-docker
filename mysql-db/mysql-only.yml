@@ -7,7 +7,7 @@ services:
       MYSQL_ROOT_HOST: '%'
       MYSQL_ROOT_PASSWORD: nathan123 #you can change the password
     volumes:
-      - mysqlvol:/var/lib/mysql #mysqlvol must be created first!
+      - mysqlvol:/var/lib/mysql
     ports:
       - "3308:3306" #we use host's port number 3308
 

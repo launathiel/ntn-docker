@@ -1,11 +1,11 @@
 version: "3.7"
 services:
   mysql-server:
-    image: mysql:
+    image: mysql:latest
     restart: always
     environment:
       MYSQL_ROOT_HOST: '%'
-      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: nathan123
     volumes:
       - volntn:/var/lib/mysql
     ports:
@@ -19,9 +19,9 @@ services:
     environment:
       PMA_HOST: mysql-server
       PMA_USER: root
-      PMA_PASSWORD: secret
+      PMA_PASSWORD: nathan123
     ports:
-      - "8000:80"
+      - "8000:80" #running on host's port 8080
     networks:
       - database
 volumes:

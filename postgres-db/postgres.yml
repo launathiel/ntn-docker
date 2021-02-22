@@ -1,0 +1,12 @@
+version: "3.7"
+services:
+  postgres-server:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: nathan123 #you can change the password
+    volumes:
+      - postgres-vol:/var/lib/postgresql/data/
+    ports:
+      - "5434:5432" #we use host's port number 5434
+volumes:
+  postgres-vol:
