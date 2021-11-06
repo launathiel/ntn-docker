@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    environment:
+      RABBITMQ_DEFAULT_USER: nathan
+      RABBITMQ_DEFAULT_PASS: nathan123
+    ports:
+        - "5672:5672"
+        - "15672:15672"
+    volumes:
+        - rabbitmq-vol:/var/lib/rabbitmq
+        - rabbitmq-log-vol:/var/log/rabbitmq
+volumes:
+  rabbitmq-vol:
+  rabbitmq-log-vol:
