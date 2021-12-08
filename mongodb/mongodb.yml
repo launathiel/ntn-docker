@@ -6,8 +6,12 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: nathan123
     volumes:
-      - mongo-vol:/var/lib/mongo/data/
+      - mongodb-vol:/data/db
+      - mongodb-config:/data/configdb
     ports:
       - "27017:27017" #we use host's port number 27017
 volumes:
-  mongo-vol:
+    mongodb-vol:
+      name: mongodb-vol
+    mongodb-config:
+      name: mongodb-config

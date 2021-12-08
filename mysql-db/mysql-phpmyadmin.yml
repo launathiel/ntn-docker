@@ -17,9 +17,10 @@ services:
     image: phpmyadmin/phpmyadmin:5.0.1
     restart: always
     environment:
-      PMA_HOST: mysql-server
-      PMA_USER: root
-      PMA_PASSWORD: nathan123
+      PMA_ARBITRARY: 1 #must login
+      # PMA_HOST: mysql-server
+      # PMA_USER: root
+      # PMA_PASSWORD: nathan123
     ports:
       - "8000:80" #running on host's port 8080
     networks:
