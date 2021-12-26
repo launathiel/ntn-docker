@@ -1,0 +1,44 @@
+version: "3.9"
+    
+services:
+  db:
+    image: mysql:latest
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: on-failure
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: nathan123
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.0.1
+    restart: on-failure
+    environment:
+      # PMA_ARBITRARY: 1 #must login
+      PMA_HOST: db
+      PMA_USER: wordpress
+      PMA_PASSWORD: nathan123
+    ports:
+      - "8000:80" #running on host's port 8080
+
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    volumes:
+      - wordpress_data:/var/www/html
+    ports:
+      - "80:80"
+    restart: on-failure
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: nathan123
+      WORDPRESS_DB_NAME: wordpress
+volumes:
+  db_data:
+    name: db_data
+  wordpress_data:
+    name: wordpress_data
