@@ -1,0 +1,12 @@
+version: '3.7'
+
+services: 
+  nginx-ssl:
+    build: .
+    container_name: nginx_ssl
+    restart: always
+    volumes:
+      - ./crt:/etc/nginx/crt
+    ports:
+      - 80:80
+      - 443:443
