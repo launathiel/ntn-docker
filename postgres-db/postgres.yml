@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   postgres-server:
-    image: postgres:latest
+    image: postgres:11
     environment:
       POSTGRES_PASSWORD: nathan123 #you can change the password
     volumes:
