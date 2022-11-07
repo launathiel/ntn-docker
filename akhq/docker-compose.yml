@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  akhq:
+    image: docker.io/tchiotludo/akhq:0.22.0
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./application.yml:/app/application.yml"
