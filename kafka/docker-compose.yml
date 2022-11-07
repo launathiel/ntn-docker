@@ -9,6 +9,8 @@ services:
       - ALLOW_ANONYMOUS_LOGIN=yes
     volumes:
       - zookeeper_data:/bitnami/zookeeper
+    networks:
+      - kafka-network
   kafka-0:
     image: docker.io/bitnami/kafka:3.3
     ports:
@@ -19,6 +21,8 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
     volumes:
       - kafka_0_data:/bitnami/kafka
+    networks:
+      - kafka-network
     depends_on:
       - zookeeper
   kafka-1:
@@ -31,6 +35,8 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
     volumes:
       - kafka_1_data:/bitnami/kafka
+    networks:
+      - kafka-network
     depends_on:
       - zookeeper
   kafka-2:
@@ -43,6 +49,8 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
     volumes:
       - kafka_2_data:/bitnami/kafka
+    networks:
+      - kafka-network
     depends_on:
       - zookeeper
 
@@ -59,3 +67,7 @@ volumes:
   kafka_2_data:
     driver: local
     name: kafka_2_data
+
+networks:
+    kafka-network:
+        external: true

@@ -8,3 +8,9 @@ services:
       - "8080:8080"
     volumes:
       - "./application.yml:/app/application.yml"
+    networks:
+      - kafka-network
+
+networks:
+    kafka-network:
+        external: true

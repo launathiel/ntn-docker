@@ -1,53 +1,18 @@
 micronaut:
   security:
     enabled: true
-    # Ldap authenticaton configuration
-    ldap:
-      default:
-        enabled: true
-        context:
-          server: 'ldap://ldap.forumsys.com:389'
-          managerDn: 'cn=read-only-admin,dc=example,dc=com'
-          managerPassword: 'password'
-        search:
-          base: "dc=example,dc=com"
-        groups:
-          enabled: true
-          base: "dc=example,dc=com"
-    # OIDC authentication configuration
-    oauth2:
-      enabled: true
-      clients:
-        oidc:
-          client-id: "<client-id>"
-          client-secret: "<client-secret>"
-          openid:
-            issuer: "<issuer-url>"
     token:
       jwt:
         signatures:
           secret:
             generator:
               secret: Y3bqovhmejFzToA8QlXXPL4f60aQ50qQ
-
-  # server:
-  #   context-path: "" # if behind a reverse proxy, path to akhq without trailing slash (optional). Example: akhq is
-                     # behind a reverse proxy with url http://my-server/akhq, set context-path: "/akhq".
-                     # Not needed if you're behind a reverse proxy with subdomain http://akhq.my-server/
 akhq:
   server:
-    access-log: # Access log configuration (optional)
-      enabled: true # true by default
-      name: org.akhq.log.access # Logger name
-      format: "[Date: {}] [Duration: {} ms] [Url: {} {}] [Status: {}] [Ip: {}] [User: {}]" # Logger format
-    # Custom HTTP response headers configuration
-    customHttpResponseHeaders:
-      - name: "Content-Security-Policy"
-        value: "default-src 'none'; frame-src 'self'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self'; frame-ancestors 'self'; form-action 'self'; upgrade-insecure-requests"
-      - name: "X-Permitted-Cross-Domain-Policies"
-        value: "none"
-
-  # default kafka properties for each clients, available for admin / producer / consumer (optional)
+    access-log:
+      enabled: true
+      name: org.akhq.log.access
+      format: "[Date: {}] [Duration: {} ms] [Url: {} {}] [Status: {}] [Ip: {}] [User: {}]"
   clients-defaults:
     consumer:
       properties:
@@ -55,10 +20,9 @@ akhq:
 
   # list of kafka cluster available for akhq
   connections:
-    kafka-cluster: # url friendly name for the cluster (letter, number, _, -, ... dot are not allowed here)
-      properties: # standard kafka properties (optional)
+    kafka-cluster:
+      properties:
         bootstrap.servers: "kafka-0:9092,kafka-1:9092,kafka-2:9092"
-      # Ui Cluster Options (optional)
       ui-options:
         topic:
           default-view: ALL  # default list view (ALL, HIDE_INTERNAL, HIDE_INTERNAL_STREAM, HIDE_STREAM). Overrides default
@@ -120,7 +84,7 @@ akhq:
 
   # Auth & Roles (optional)
   security:
-    default-group: admin # Default groups for all the user even unlogged user
+    default-group: no-rules # Default groups for all the user even unlogged user
     # Groups definition
     groups:
       admin: # unique key
@@ -190,11 +154,11 @@ akhq:
     # Basic auth configuration
     basic-auth:
       - username: admin # Username
-        password: 240BE518FABD2724DDB6F04EEB1DA5967448D7E831C08C8FA822809F74C720A9 # rashasia
+        password: 240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9 # admin123
         groups:
           - admin
       - username: nathan # Username
-        password: B43537F814B9EF3C1EF831EBC00C93E17046F3F1B54CC20C5BFBFA2723DA5739 # nathan123
+        password: b43537f814b9ef3c1ef831ebc00c93e17046f3f1b54cc20c5bfbfa2723da5739 # nathan123
         groups: 
           - readeronly
 
