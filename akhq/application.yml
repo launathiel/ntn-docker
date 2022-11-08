@@ -17,6 +17,7 @@ akhq:
     consumer:
       properties:
         isolation.level: read_committed
+        default.api.timeout.ms: 15000000
 
   # list of kafka cluster available for akhq
   connections:
