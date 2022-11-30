@@ -22,6 +22,8 @@ services:
       - IPC_LOCK
     volumes:
       - ./elasticsearch-data:/usr/share/elasticsearch/data
+    networks:
+      - kafka-network
     ports:
       - 9200:9200
       - 9300:9300
@@ -37,6 +39,22 @@ services:
     #   - ./kibana.yml:/usr/share/kibana/config/kibana.yml
     ports:
       - 5601:5601
+    networks:
+      - kafka-network
+    depends_on:
+      - elasticsearch
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.5.2
+    volumes:
+      - ./config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./pipeline:/usr/share/logstash/pipeline:ro
+    ports:
+      - "5005:5000"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - kafka-network
     depends_on:
       - elasticsearch
 
@@ -44,3 +62,7 @@ volumes:
   elasticsearch-data:
     name: elasticsearch-data
     external: true
+
+networks:
+    kafka-network:
+        external: true
