@@ -58,11 +58,6 @@ services:
     depends_on:
       - elasticsearch
 
-volumes:
-  elasticsearch-data:
-    name: elasticsearch-data
-    external: true
-
 networks:
     kafka-network:
         external: true
