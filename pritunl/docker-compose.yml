@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  pritunl:
+    image: 'jippi/pritunl:1.30.3383.72'
+    privileged: true
+    ports:
+      - '80:80'
+      - '443:443'
+      - '1194:1194/udp'
+      - '1194:1194/tcp'
+    volumes:
+      - 'pritunl_data:/var/lib/pritunl'
+      - 'pritunl_db:/var/lib/mongodb'
+
+volumes:
+  pritunl_data:
+    driver: local
+    external: true
+  pritunl_db:
+    driver: local
+    external: true
