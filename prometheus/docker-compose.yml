@@ -1,0 +1,29 @@
+version: '3.7'
+
+volumes:
+    prometheus_data:
+      name: prometheus_data
+      external: true
+
+networks:
+  kafka-network:
+    external: true
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.36.2
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--web.enable-lifecycle'
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=6h'
+      - '--storage.tsdb.max-block-duration=6h'
+      - '--storage.tsdb.min-block-duration=6h'
+    ports:
+      - 9090:9090
+    networks:
+      - kafka-network
+    restart: always
