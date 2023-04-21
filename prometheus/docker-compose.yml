@@ -6,7 +6,7 @@ volumes:
       external: true
 
 networks:
-  kafka-network:
+  monitoring:
     external: true
 
 services:
@@ -25,5 +25,4 @@ services:
     ports:
       - 9090:9090
     networks:
-      - kafka-network
-    restart: always
+      - monitoring
