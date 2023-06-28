@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  clickhouse:
+    container_name: clickhouse-local
+    image: clickhouse/clickhouse-server
+    ports:
+      - "18123:8123"
+      - "19000:9000"
+    volumes:
+      - "clickhouse_data:/var/lib/clickhouse"
+      - "clickhouse_logs_data:/var/log/clickhouse-server"
+    networks:
+      - kafka-network
+
+networks:
+    kafka-network:
+        external: true
+
+volumes:
+  clickhouse_data:
+    name: clickhouse_data
+    external: true
+  clickhouse_logs_data:
+    name: clickhouse_logs_data
+    external: true
